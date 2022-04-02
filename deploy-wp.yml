@@ -1,0 +1,5 @@
+---
+- name: Clone VM
+  hosts: localhost
+  roles:
+    - { role: proxmox-clone, tags: ["clone"]}
