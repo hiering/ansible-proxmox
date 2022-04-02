@@ -1,4 +1,9 @@
 ---
+- name: Install proxmox ve
+  hosts: localhost
+  roles:
+    - { role: install-proxmox, tags: ["install-pve"]}
+
 - name: Clone VM
   hosts: localhost
   roles:

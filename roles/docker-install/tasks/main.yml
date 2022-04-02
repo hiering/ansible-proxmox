@@ -1,0 +1,46 @@
+---
+- name: Install docker packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+
+- name: Add docker GPG key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Set up the stable repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
+    state: present
+    update_cache: yes
+
+- name: Install docker
+  apt:
+    name: docker-ce, python3-pip
+    state: latest
+    update_cache: yes
+
+- name: Make sure a service unit is running
+  ansible.builtin.systemd:
+    state: started
+    name: docker
+
+- name: Create group
+  group:
+    name: docker
+    state: present
+
+- name: Add user to the group
+  ansible.builtin.user:
+    name: ubuntu
+    append: yes
+    groups: docker
+
+- name: Install docker python package
+  pip:
+    name: docker  

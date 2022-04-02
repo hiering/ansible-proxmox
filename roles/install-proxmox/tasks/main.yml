@@ -1,0 +1,27 @@
+---
+- name: Add IP address
+  lineinfile:
+    path: /etc/hosts
+    
+    
+- name: Add Proxmox VE repository key
+  ansible.builtin.apt_key:
+    url: https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg
+    state: present
+
+- name: Add the Proxmox VE repository
+  apt_repository:
+    repo: deb [arch=amd64] http://download.proxmox.com/debian/pve bullseye pve-no-subscription
+    state: present
+    update_cache: yes
+    upgrade: full
+
+- name: Install Proxmox packages
+  apt:
+    name:
+      - proxmox-ve 
+      #- postfix 
+      - open-iscsi
+
+- name: Reboot system
+  reboot:
