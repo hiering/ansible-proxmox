@@ -1,10 +1,10 @@
 ---
-- name: Install proxmox ve
-  hosts: localhost
-  roles:
-    - { role: install-proxmox, tags: ["install-pve"]}
+#- name: Install proxmox ve
+#  hosts: localhost
+#  roles:
+#    - { role: install-proxmox, tags: ["install-pve"]}
 
 - name: Clone VM
-  hosts: localhost
+  hosts: bidmachine
   roles:
     - { role: proxmox-clone, tags: ["clone"]}

@@ -1,16 +1,27 @@
 ---
-- name: Create new VM using Cloud-Init
+- name: Download the image
+  ansible.builtin.get_url:
+    url: https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+
+- name: Upload template
+  community.general.proxmox_template:
+    node: "{{ pve_node }}"
+    api_user: "{{ api_user }}"
+    api_password: "{{ api_pass }}"
+    api_host: "{{ api_host }}"
+    storage: local
+
+- name: Clone vms
   community.general.proxmox_kvm:
     node: "{{ pve_node }}"
     api_user: "{{ api_user }}"
     api_password: "{{ api_pass }}"
     api_host: "{{ api_host }}"
-    clone: "{{ clone_name }}"
+    clone: "{{ name_templete }}"
+    vmid: "{{ id_templete }}"
     name: "{{ item.value.name }}"
-    newid: "{{ item.value.newid }}"
     net:
       net0: 'virtio,bridge=vmbr'
     ipconfig:
       ipconfig0: '{{ item.value.ip_addr }}/24,gw=192.168.1.1'
-    
-  loop: "{{ lookup('dict', vms) }}"
+  loop: "{{ lookup('dict', vms) }}"  
