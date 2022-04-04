@@ -24,4 +24,4 @@
       net0: 'virtio,bridge=vmbr'
     ipconfig:
       ipconfig0: '{{ item.value.ip_addr }}/24,gw=192.168.1.1'
-  loop: "{{ lookup('dict', vms) }}"  
+  loop: "{{ lookup('dict', vms) }}"

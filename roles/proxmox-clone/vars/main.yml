@@ -1,8 +1,8 @@
 ---
-pve_node: 
-api_user: 
-api_pass: 
-api_host: 
+pve_node:
+api_user:
+api_pass:
+api_host:
 name_templete: VM 100
 id_templete: 100
 vms:
