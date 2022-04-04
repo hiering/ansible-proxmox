@@ -1,14 +1,16 @@
 ---
-pve_node:
-api_user:
-api_pass:
-api_host:
+pve_node: bidmachine-k8s-diff-apac04-old
+api_user: root@pam
+api_pass: 6mS537cPzyKy
+api_host: bidmachine-k8s-diff-apac04-old
 name_templete: VM 100
 id_templete: 100
 vms:
   data_base_server:
     name: wp-dbsercer
+    newid: 112
     ip_addr: 192.168.1.2
   web_server:
     name: wp-webserver
+    newid: 113
     ip_addr: 192.168.1.3
