@@ -1,47 +1,6 @@
 ---
-- name: Download the image
-  ansible.builtin.get_url:
-    url: https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
-    dest: /root/focal-cloudimg.img
+- name: Create data base server
+  include_tasks: 102.yml
 
-- name: Create VM
-  community.general.proxmox_kvm:
-    node: "{{ pve_node }}"
-    api_user: "{{ api_user }}"
-    api_password: "{{ api_pass }}"
-    api_host: "{{ api_host }}"
-    name: wp-dbserver
-    vmid: 112
-    memory: 2048
-    cores: 2
-    net:
-      net0: 'virtio,bridge=vmbr0'
-    ide:
-      ide2: 'local:cloudinit,format=qcow2'
-    ciuser: "{{ server_user }}"
-    cipassword: "{{server_pass}}"
-    sshkeys: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCBYj+iMoJIU5lJ5sIC2ZC8ultfpTxUL4OcTlDmaZzoLk7ORjApfTszpLdFHRWzf+rSlJkiSzG0+LBbk8iCo5Fuurr84BFAjvTBrVLJsDpH09bwiSRm+W3YC9WLes72sFeQj/7Qb1zWJPmYzzKmfCNi4M3ILL+Bsq3ecLMVOlZR1Dkaqvxvx8Jfa0TVWyDqO5QHqov4Bn1Gt8MgIodqofO5K22jvjFu48NOkoMWG2MYqk0vC9w+ENit/kxJkS++m68Bp8NaIEexhqFD8dQ+tend5SWqQzNpNMy0fvIpAZT3zImiLj7r3v8KHQ2xJNeF7wxS3HVGjFCRxksgyLdlnpH root@bidmachine-k8s-diff-apac04-old
-    nameservers: 8.8.8.8
-    ipconfig:
-      ipconfig0: 'ip=192.168.1.2/24,gw=192.168.1.1'
-
-- name: Import disk to storage
-  ansible.builtin.command:
-    cmd: "qm importdisk 112 /root/focal-cloudimg.img local"
-
-- name: Attach new disk to the VM
-  ansible.builtin.command:
-    cmd: "qm set 112 --scsihw virtio-scsi-pci --scsi0 local:112/vm-112-disk-0.raw"
-
-- name: Set boot disk
-  ansible.builtin.command:
-    cmd: "qm set 112 --boot c --bootdisk scsi0"
-
-- name: Start VM
-  community.general.proxmox_kvm:
-    node: "{{ pve_node }}"
-    api_user: "{{ api_user }}"
-    api_password: "{{ api_pass }}"
-    api_host: "{{ api_host }}"
-    name: wp-dbserver
-    state: started
+- name: Create web server
+  include_tasks: 103.yml 

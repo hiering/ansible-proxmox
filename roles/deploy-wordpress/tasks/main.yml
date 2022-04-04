@@ -1,0 +1,14 @@
+- name: Deploy Wordpress
+  docker_container:
+    image: wordpress
+    name: wordpress
+    restart_policy: on-failure
+    ports:
+      - 8080:80
+    volumes:
+      "- wordpress:/var/www/html"
+    env:
+      WORDPRESS_DB_HOST:
+      WORDPRESS_DB_USER:
+      WORDPRESS_DB_PASSWORD:
+      WORDPRESS_DB_NAME:
