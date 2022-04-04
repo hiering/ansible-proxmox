@@ -3,10 +3,9 @@
     image: wordpress
     name: wordpress
     restart_policy: on-failure
-    ports:
-      - 8080:80
+    published_ports: [ "8080:80" ]
     volumes:
-      "- wordpress:/var/www/html"
+      - "wordpress:/var/www/html"
     env:
       WORDPRESS_DB_HOST: 192.168.1.5
       WORDPRESS_DB_USER: wp_user

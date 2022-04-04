@@ -25,4 +25,4 @@
   hosts: web_server
   become: true
   roles:
-    - {role: deploy-mysql, tags: ["wp"]}
+    - {role: deploy-wordpress, tags: ["wp"]}
