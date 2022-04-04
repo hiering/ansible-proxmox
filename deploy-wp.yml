@@ -8,3 +8,21 @@
   hosts: bidmachine
   roles:
     - { role: proxmox-clone, tags: ["clone"]}
+
+- name: Install docker
+  hosts: vms
+  become: true
+  roles:
+    - { role: docker-install, tags: ["docker"]}
+
+- name: Deploy MySQL
+  hosts: wp_dbserver
+  become: true
+  roles:
+    - {role: deploy-mysql, tags: ["mysql"]}
+
+- name: Deploy Wordpress
+  hosts: wp_webserver
+  become: true
+  roles:
+    - {role: deploy-mysql, tags: ["wp"]}
