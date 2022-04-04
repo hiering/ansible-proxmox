@@ -5,8 +5,8 @@
     restart_policy: on-failure
     volumes:
       - db:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE:
-      MYSQL_USER:
-      MYSQL_PASSWORD:
-      MYSQL_RANDOM_ROOT_PASSWORD:
+    env:
+      MYSQL_DATABASE: wp_db
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: 12345
+      MYSQL_RANDOM_ROOT_PASSWORD: true
