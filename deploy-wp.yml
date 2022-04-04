@@ -16,13 +16,13 @@
     - { role: docker-install, tags: ["docker"]}
 
 - name: Deploy MySQL
-  hosts: wp_dbserver
+  hosts: db_server
   become: true
   roles:
     - {role: deploy-mysql, tags: ["mysql"]}
 
 - name: Deploy Wordpress
-  hosts: wp_webserver
+  hosts: web_server
   become: true
   roles:
     - {role: deploy-mysql, tags: ["wp"]}

@@ -8,5 +8,5 @@
     env:
       MYSQL_DATABASE: wp_db
       MYSQL_USER: wp_user
-      MYSQL_PASSWORD: 12345
-      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_PASSWORD: "12345"
+      MYSQL_RANDOM_ROOT_PASSWORD: "!qazxdr5"
