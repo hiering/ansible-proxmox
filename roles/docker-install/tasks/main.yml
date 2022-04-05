@@ -37,7 +37,7 @@
 
 - name: Add user to the group
   ansible.builtin.user:
-    name: ubuntu
+    name: braz
     append: yes
     groups: docker
 

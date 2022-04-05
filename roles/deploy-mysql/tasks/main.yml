@@ -1,12 +1,10 @@
 - name: Deploy MySQL
   docker_container:
-    image: mysql:8.0.28
+    image: mysql:5.7
     name: mysql
     restart_policy: on-failure
-    volumes:
-      - db:/var/lib/mysql
+    published_ports: ["3306:3306"]
+    state: started
     env:
-      MYSQL_DATABASE: wp_db
-      MYSQL_USER: wp_user
-      MYSQL_PASSWORD: "12345"
-      MYSQL_RANDOM_ROOT_PASSWORD: "!qazxdr5"
+      MYSQL_DATABASE: "wp_db"
+      MYSQL_ROOT_PASSWORD: "12345"
