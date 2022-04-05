@@ -31,12 +31,3 @@
   become: true
   roles:
     - {role: deploy-wordpress, tags: ["wp"]}
-
-- name: Save rules
-  ansible.builtin.command:
-    cmd: iptables-save > /etc/iptables.up.rules
-
-- name: Started rules on a reboot
-  ansible.builtin.file:
-    src: iptables
-    dest: /etc/network/if-pre-up.d/iptables

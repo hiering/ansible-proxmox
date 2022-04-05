@@ -44,3 +44,12 @@
     destination_port: 2223
     jump: DNAT
     to_destination: 192.168.1.6:22
+
+- name: Save rules
+  ansible.builtin.command:
+    cmd: iptables-save > /etc/iptables.up.rules
+
+- name: Started rules on a reboot
+  ansible.builtin.file:
+    src: iptables
+    dest: /etc/network/if-pre-up.d/iptables
