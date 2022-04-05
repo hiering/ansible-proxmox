@@ -4,6 +4,11 @@
 #  roles:
 #    - { role: install-proxmox, tags: ["install-pve"]}
 
+- name: Set firewall rules
+  hosts: bidmachine
+  roles:
+    - {role: firewall, tags: ["firewall"]}
+
 - name: Clone VM
   hosts: bidmachine
   roles:
@@ -26,3 +31,12 @@
   become: true
   roles:
     - {role: deploy-wordpress, tags: ["wp"]}
+
+- name: Save rules
+  ansible.builtin.command:
+    cmd: iptables-save > /etc/iptables.up.rules
+
+- name: Started rules on a reboot
+  ansible.builtin.file:
+    src: iptables
+    dest: /etc/network/if-pre-up.d/iptables
