@@ -47,7 +47,7 @@
 
 - name: Save rules
   ansible.builtin.command:
-    cmd: iptables-save > /etc/iptables.up.rules
+    cmd: "iptables-save > /etc/iptables.up.rules"
 
 - name: Started rules on a reboot
   ansible.builtin.file:
