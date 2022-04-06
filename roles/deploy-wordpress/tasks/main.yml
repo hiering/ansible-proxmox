@@ -3,7 +3,7 @@
     image: wordpress
     name: wordpress
     state: started
-    restart_policy: on-failure
+    restart_policy: always
     published_ports: [ "80:80" ]
     env:
       WORDPRESS_DB_HOST: 192.168.1.5

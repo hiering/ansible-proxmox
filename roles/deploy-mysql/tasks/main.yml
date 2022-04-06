@@ -2,7 +2,7 @@
   docker_container:
     image: mysql:5.7
     name: mysql
-    restart_policy: on-failure
+    restart_policy: always
     published_ports: ["3306:3306"]
     state: started
     env:
