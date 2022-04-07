@@ -3,4 +3,8 @@
   include_tasks: 102.yml
 
 - name: Create web server
-  include_tasks: 103.yml 
+  include_tasks: 103.yml
+
+- name: Pause for 1 minutes
+  pause:
+    minutes: 1
